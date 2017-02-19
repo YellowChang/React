@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <meta charset="utf-8">
+    <title></title>
+    <!-- react.js是React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- react-dom.js的作用是提高与DOM相关功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- browser-min.js的作用是将JSX语法转换成JavaScript语法
+     有两种方法：1.根据网址打开复制内容生成js文件，直接同上导入文件路径即可 2.直接导入网址
+     https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js
+    -->
+    <script src="./build/browser.min.js" charset="utf-8"></script> -->
+
+    <style>
+    /*如果我们设置 direction 属性为 rtl (right-to-left),
+    弹性子元素的排列方式也会改变，页面布局也跟着改变:*/
+    /*body {
+    direction: rtl;
+    }*/
+
+    /*定义弹性盒子容器*/
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        width: 400px;
+        height: 250px;
+        background-color: yellow;
+        /*flex-direction- 顺序指定了弹性子元素在父容器中的位置。
+          1.row：横向从左到右排列（左对齐），默认的排列方式。
+          2.row-reverse：反转横向排列（右对齐，从后往前排，最后一项排在最前面。
+          3.column：纵向排列。
+          4.column-reverse：反转纵向排列，从后往前排，最后一项排在最上面。
+        */
+        /*-webkit-flex-direction: row-reverse;
+        flex-direction: row-reverse;*/
+
+        /*justify-content 属性
+        内容对齐（justify-content）属性应用在弹性容器上，
+        把弹性项沿着弹性容器的主轴线（main axis）对齐。
+        各个值解析:
+        1.flex-start：
+        弹性项目向行头紧挨着填充。这个是默认值。
+        第一个弹性项的main-start外边距边线被放置在该行的main-start边线，
+        而后续弹性项依次平齐摆放。
+        2.flex-end：
+        弹性项目向行尾紧挨着填充。第一个弹性项的main-end外边距边线被放置在该行的main-end边线，
+        而后续弹性项依次平齐摆放。
+        3.center：
+        弹性项目居中紧挨着填充。
+        （如果剩余的自由空间是负的，则弹性项目将在两个方向上同时溢出）。
+        4.space-between：
+        弹性项目平均分布在该行上。如果剩余空间为负或者只有一个弹性项，则该值等同于flex-start。
+        否则，第1个弹性项的外边距和行的main-start边线对齐，
+        而最后1个弹性项的外边距和行的main-end边线对齐，
+        然后剩余的弹性项分布在该行上，相邻项目的间隔相等。
+        5.space-around：
+        弹性项目平均分布在该行上，两边留有一半的间隔空间。如果剩余空间为负或者只有一个弹性项，
+        则该值等同于center。否则，弹性项目沿该行分布，且彼此间隔相等（比如是20px），
+        同时首尾两边和弹性容器之间留有一半的间隔（1/2*20px=10px）。
+        */
+        /*-webkit-justify-content: space-between;
+        justify-content: space-between;*/
+
+        /*align-items 属性
+         align-items 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。
+         各个值解析:
+          1.flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。
+          2.flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。
+          3.center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。
+          （如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。
+          4.baseline：如弹性盒子元素的行内轴与侧轴为同一条，
+          则该值与'flex-start'等效。其它情况下，该值将参与基线对齐。
+          5.stretch：如果指定侧轴大小的属性值为'auto'，
+          则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，
+          但同时会遵照'min/max-width/height'属性的限制。
+          */
+          /*-webkit-align-items: flex-end;
+          align-items: flex-end;*/
+          /*flex-wrap 属性 用于指定弹性盒子的子元素换行方式。
+            各个值解析:
+            1.nowrap - 默认， 弹性容器为单行。该情况下弹性子项可能会溢出容器。
+            2.wrap - 弹性容器为多行。该情况下弹性子项溢出的部分会被放置到新行，
+                  子项内部会发生断行
+            3.wrap-reverse -反转 wrap 排列。
+          */
+          /*-webkit-flex-wrap: wrap;
+         flex-wrap: wrap;*/
+
+    }
+    /*定义弹性盒子元素*/
+    .flex-item {
+        background-color: cornflowerblue;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+    }
+
+    /*各个值解析:
+    <integer>：用整数值来定义排列顺序，数值小的排在前面。可以为负值。
+    order 属性设置弹性容器内弹性子元素的属性:
+    */
+    /*.first {
+     -webkit-order: -1;
+     order: -1;
+   }*/
+
+   /*对齐
+    设置"margin"值为"auto"值，自动获取弹性容器中剩余的空间。
+    所以设置垂直方向margin值为"auto"，可以使弹性子元素在弹性容器的两上轴方向都完全集中。
+    以下实例在第一个弹性子元素上设置了 margin-right: auto; 。
+    它将剩余的空间放置在元素的右侧
+    */
+    /*.flex-item:last-child {
+     margin-left: auto;
+   }*/
+   /*.flex-item:last-child {
+    margin: auto;
+  }*/
+
+  /* align-self 属性用于设置弹性元素自身在侧轴（纵轴）方向上的对齐方式。
+    各个值解析:
+    auto：如果'align-self'的值为'auto'，则其计算值为元素的父元素的'align-items'值，
+    如果其没有父元素，则计算值为'stretch'。
+    flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。
+    flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。
+    center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。
+    （如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。
+    baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与'flex-start'等效。
+    其它情况下，该值将参与基线对齐。
+    stretch：如果指定侧轴大小的属性值为'auto'，
+    则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，
+    但同时会遵照'min/max-width/height'属性的限制。*/
+    .item1 {
+        -webkit-align-self: flex-start;
+        align-self: flex-start;
+    }
+    .item2 {
+        -webkit-align-self: flex-end;
+        align-self: flex-end;
+    }
+
+    .item3 {
+        -webkit-align-self: center;
+        align-self: center;
+    }
+
+    .item4 {
+        -webkit-align-self: baseline;
+        align-self: baseline;
+    }
+
+    .item5 {
+        -webkit-align-self: stretch;
+        align-self: stretch;
+    }
+
+
+    /*flex 属性用于指定弹性子元素如何分配空间。
+    各个值解析:
+    auto: 计算值为 1 1 auto
+    initial: 计算值为 0 1 auto
+    none：计算值为 0 0 auto
+    inherit：从父元素继承
+    [ flex-grow ]：定义弹性盒子元素的扩展比率。
+    [ flex-shrink ]：定义弹性盒子元素的收缩比率。
+    [ flex-basis ]：定义弹性盒子元素的默认基准值。
+    以下实例中，第一个弹性子元素占用了 2/4 的空间，其他两个各占 1/4 的空间:*/
+    /*.item1{
+        -webkit-flex: 2;
+        flex: 2;
+    }
+
+    .item2 {
+        -webkit-flex: 1;
+        flex: 1;
+    }
+
+    .item3 {
+        -webkit-flex: 1;
+        flex: 1;
+    }*/
+    </style>
+
+  </head>
+  <body>
+    <!-- React渲染的模板内容会插入到这个DOM节点中，作为一个容器a -->
+    <div id="container">
+
+    </div>
+    <div class="flex-container">
+      <div class="item1">flex item 1</div>
+      <div class="item2">flex item 2</div>
+      <div class="item3">flex item 3</div>
+      <div class="item4">flex item 4</div>
+      <div class="item5">flex item 5</div>
+      <div class="flex-item">flex item 6</div>
+    </div>
+  </body>
+  <!-- 在React开发中，使用JSX语法，与JavaScript不兼容，在使用JSX的地方，type要设置为text/babel -->
+  <!-- babel是一个转换编辑器，ES6转成可以在浏览器运行的代码 -->
+  <script type="text/babel">
+  // 在此处编写React代码
+  </script>
+
+</html>
